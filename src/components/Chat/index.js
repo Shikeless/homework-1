@@ -13,17 +13,11 @@ class Chat extends React.Component {
             this.setState(
                 {
                     messages: [...this.state.messages, {text: this.state.messageInput, id: this.state.messages.length+1}]
-                },
-                () => {
-                    console.log(this.state.messages);
                 }
             );
             this.setState(
                 {
                     messageInput: ""
-                },
-                () => {
-                    console.log(this.state.messageInput);
                 }
             )
         }
