@@ -1,77 +1,53 @@
 import React from 'react';
 import bond from './assets/bond_approve.jpg';
 
-const Error = (props) => <h1>{props.error}</h1>
+const Error = ({error}) => <h1>{error}</h1>
 const Image = () => <img src={bond} alt="Bond"/>
 
 class Form extends React.Component {
     state = { firstName: "", lastName: "", password: "", errorCode: "" };
 
-    emptyInputs = () => this.setState({ firstName: "", lastName: "", password: ""});
+    setDefaultState = () => this.setState({ firstName: "", lastName: "", password: ""});
 
-    checkForErros = () => {
-        if (this.state.errorCode !== "" && this.state.errorCode !== "Allowed" && this.state.firstName === "" && this.state.lastName === "" && this.state.password === "") {
+    checkError = () => {
+        const { firstName, lastName, password, errorCode } = this.state
+        if (errorCode !== "" && errorCode !== "Allowed" && firstName === "" && lastName === "" && password === "") {
             return <Error error={this.state.errorCode}/>
-        } else if (this.state.errorCode === "Allowed") {
+        } else if (errorCode === "Allowed") {
             return <Image />
         }
     }
-  
+
     handleSubmit = event => {
         event.preventDefault();
-        if (this.state.firstName === "") {
-            this.setState({ 
-                errorCode: "First Name field is empty" 
-            },
-                this.emptyInputs
-            );
-        } else if (this.state.lastName === "") { 
-            this.setState({ 
-                errorCode: "Second Name field is empty" 
-            },
-                this.emptyInputs
-            );
-        } else if (this.state.password === "") { 
-            this.setState({ 
-                errorCode: "Password field is empty" 
-            },
-                this.emptyInputs
-            );
-        } else if (this.state.firstName !== "James") { 
-            this.setState({ 
-                errorCode: "Wrond First Name" 
-            },
-                this.emptyInputs
-            );
-        } else if (this.state.lastName !== "Bond") { 
-            this.setState({ 
-                errorCode: "Wrond Second Name" 
-            },
-                this.emptyInputs
-            );
-        } else if (this.state.password !== "007") { 
-            this.setState({ 
-                errorCode: "Wrond Password" 
-            },
-                this.emptyInputs
-            );
-        } else {
-            this.setState(
-                { errorCode: "Allowed" }
-            );
-        }
+        const { firstName, lastName, password } = event.target;
+        for (let {name, value} of [ firstName, lastName, password ]) {
+            if (value === "") {
+                this.setState({ 
+                    errorCode: `${name} field is empty`
+                },
+                    this.setDefaultState
+                );
+                break;
+            } else if ((name === 'password' &&  value !== '007') || (name === 'lastName' &&  value !== 'Bond') || (name === 'firstName' &&  value !== 'James')) {
+                this.setState({ 
+                    errorCode: `wrong ${name}`
+                },
+                    this.setDefaultState
+                );
+                break;
+            } else {
+                this.setState({ 
+                    errorCode: "Allowed"
+                },
+                    this.setDefaultState
+                )
+            }
+        }   
     };
   
-    handleFirstNameChange = event => {
-        this.setState({ firstName: event.target.value });
-    };
-  
-    handleLastNameChange = event => {
-        this.setState({ lastName: event.target.value });
-    };
-
-    handlePassword = event => {
-        this.setState({ password: event.target.value });
+    handleChange = event => {
+        this.setState({ [event.target.name]: event.target.value });
     };
   
     render() {
@@ -84,8 +60,9 @@ class Form extends React.Component {
                         <input
                             className=".t-input-firstName"
                             type="text"
+                            name="firstName"
                             value={firstName}
-                            onChange={this.handleFirstNameChange}
+                            onChange={this.handleChange}
                         />
                     </label>
                     <label>
@@ -93,8 +70,9 @@ class Form extends React.Component {
                         <input
                             className=".t-input-secondName"
                             type="text"
+                            name="lastName"
                             value={lastName}
-                            onChange={this.handleLastNameChange}
+                            onChange={this.handleChange}
                         />
                     </label>
                     <label>
@@ -102,13 +80,14 @@ class Form extends React.Component {
                         <input
                             className=".t-input-password"
                             type="text"
+                            name="password"
                             value={password}
-                            onChange={this.handlePassword}
+                            onChange={this.handleChange}
                         />
                     </label>
                     <input type="submit" value="Submit" />
                 </form>
-                {this.checkForErros.call()}
+                {this.checkError.call()}
             </div> 
         );
     }
