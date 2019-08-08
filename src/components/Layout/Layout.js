@@ -4,13 +4,12 @@ import SectionTitle from '../SectionTitle';
 import { AuthProvider, AuthConsumer } from '../../contexts/Auth'
 
 class Layout extends PureComponent {
-  
   renderHeader(HeaderChild) {
     return (
       <header className="header">
         <SectionTitle className="header__title">Header</SectionTitle>
         <div className="header__content">
-        <AuthConsumer >
+          <AuthConsumer >
             {({ isAuthorized, email, logout }) =>
               <HeaderChild isAuthorized={isAuthorized} email={email} logout={logout}/>
             }
@@ -23,30 +22,28 @@ class Layout extends PureComponent {
   renderFooter(FooterChild) {
     return (
       <header className="footer">
-      <SectionTitle className="header__title">footer</SectionTitle>
-      <div className="footer__content">
-      <AuthConsumer >
-            {({ isAuthorized, email, logout }) =>
+        <SectionTitle className="header__title">footer</SectionTitle>
+        <div className="footer__content">
+          <AuthConsumer >
+            {({ isAuthorized }) =>
               <FooterChild isAuthorized={isAuthorized}/>
             }
-          </AuthConsumer>
-          
-      </div>
+          </AuthConsumer>    
+        </div>
       </header>
     );
   }
 
   render() {
     const { children } = this.props;
-
     return (
-        <div>
-          <React.Fragment>
+      <div>
+        <React.Fragment>
           {this.renderHeader(this.props.header)}
           { children }
           {this.renderFooter(this.props.footer)}
-          </React.Fragment>
-        </div>
+        </React.Fragment>
+      </div>
     )
   }
 }

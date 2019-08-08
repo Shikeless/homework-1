@@ -3,7 +3,6 @@ import './Header.css';
 
 class Header extends PureComponent {
   render() {
-    console.log(this.props)
     const { isAuthorized, email} = this.props;
     if (isAuthorized === false) return null;
     return (
@@ -11,9 +10,7 @@ class Header extends PureComponent {
         <p>{email}</p>
         <button className='button.t-logout' onClick={this.props.logout}>LOGOUT</button>
       </div>
-
     )
-
   }
 }
 

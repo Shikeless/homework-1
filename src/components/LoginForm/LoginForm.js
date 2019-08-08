@@ -47,7 +47,6 @@ class LoginForm extends PureComponent {
     return (
       <div className="login-form">
         <h1 className="login-form-title">Авторизация</h1>
-
         {fields.map(({ id, label, type }) => (
           <p key={id} className="field">
             <label className="field__label" htmlFor={id}>
