@@ -36,16 +36,16 @@ class LoginForm extends PureComponent {
     } = this.state;
     const { authorize } = this.props;
 
-    authorize(email, password);
+      authorize(email, password);
   };
 
   render() {
+    console.log(this.props)
     const { values } = this.state;
     const { authorizeError } = this.props;
 
     return (
       <div className="login-form">
-        {console.log(this.props)}
         <h1 className="login-form-title">Авторизация</h1>
 
         {fields.map(({ id, label, type }) => (
@@ -65,7 +65,7 @@ class LoginForm extends PureComponent {
         ))}
 
         {authorizeError !== '' && (
-          <p className="login-form-error t-login-error">{authorizeError()}</p>
+          <p className="login-form-error t-login-error">{authorizeError}</p>
         )}
 
         <div className="login-form__buttons">

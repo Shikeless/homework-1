@@ -3,16 +3,17 @@ import './Header.css';
 
 class Header extends PureComponent {
   render() {
-    console.log(this.props.isAuthorized)
-    const { isAuthorized } = this.props.isAuthorized;
-    const { userName } = this.props.userName;
-    if ( { isAuthorized } === true ) {
-      return <p>{ userName }</p>
-    } else { 
-      return <p>false</p>
-    } 
- 
-    
+    console.log(this.props)
+    const { isAuthorized, email} = this.props;
+    if (isAuthorized === false) return null;
+    return (
+      <div>      
+        <p>{email}</p>
+        <button className='button.t-logout' onClick={this.props.logout}>LOGOUT</button>
+      </div>
+
+    )
+
   }
 }
 

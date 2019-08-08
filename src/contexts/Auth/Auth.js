@@ -4,27 +4,43 @@ const { Provider, Consumer: AuthConsumer } = React.createContext('');
 
 class AuthProvider extends PureComponent {
     state = {
-        authorizeError: ''
+        isAuthorized: false,
+        authorizeError: '',
+        email: ''
     }
-    authorize = (email, password) => {
-        const validData = { email: 'stu@dent.com', password: '123' }
 
-        if (email === validData.email && password === validData.password) {
-            this.props.returnAuthorizeStatus(email) 
+    authorize = (login, password) => {
+        const validData = { email: 'stu@dent.com', password: '123' }
+        if (login === validData.email && password === validData.password) {
+            this.setState(({ isAuthorized, authorizeError, email  }) => ({
+              isAuthorized: !isAuthorized, authorizeError: '', email: login, 
+            }))
+        } else { 
+          this.setState ({
+            authorizeError: 'Email или пароль введён не верно'
+          })
         }
+    }
+
+    logout = () => {
+      this.setState({
+        isAuthorized: false
+      })
     }
 
 
   getProviderValue = () => {
     return {
-      isAuthorized: this.props.isAuthorized,
+      isAuthorized: this.state.isAuthorized,
       authorize: this.authorize,
-      authorizeError: this.state.authorizeError
+      authorizeError: this.state.authorizeError,
+      email: this.state.email,
+      logout: this.logout
     }
   }
 
   render() {
-    console.log(this.props);
+    console.log(this.state)
     const { children } = this.props;
     return <Provider value={this.getProviderValue()}>{children}</Provider>;
   }

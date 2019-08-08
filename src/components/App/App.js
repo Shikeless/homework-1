@@ -7,25 +7,13 @@ import Congratulations from '../Congratulations';
 import { AuthProvider, AuthConsumer } from '../../contexts/Auth';
 
 class App extends PureComponent {
-  state = {
-    isAuthorized: false,
-    userName: ''
-  }
-
-  returnAuthorizeStatus = (name) => {
-      this.setState({ 
-        isAuthorized: !this.state.isAuthorized,
-        userName: name
-      })
-  }
-
   render() {
     return (
-      <AuthProvider isAuthorised={this.state.isAuthorized} returnAuthorizeStatus={this.returnAuthorizeStatus}>
-        <Layout header={Header} footer={Footer} isAuthorized={this.state.isAuthorized} userName={this.state.userName}>
+      <AuthProvider>
+        <Layout header={Header} footer={Footer}>
           <AuthConsumer >
             {({ isAuthorized, authorize, authorizeError}) =>
-              isAuthorized ? (
+              isAuthorized === true ? (
                 <Congratulations />
               ) : (
                 <LoginForm

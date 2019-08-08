@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import './Layout.css';
 import SectionTitle from '../SectionTitle';
+import { AuthProvider, AuthConsumer } from '../../contexts/Auth'
 
 class Layout extends PureComponent {
   
@@ -9,7 +10,11 @@ class Layout extends PureComponent {
       <header className="header">
         <SectionTitle className="header__title">Header</SectionTitle>
         <div className="header__content">
-          <HeaderChild isAuthorized={this.props.isAuthorized} userName={this.props.userName}/>
+        <AuthConsumer >
+            {({ isAuthorized, email, logout }) =>
+              <HeaderChild isAuthorized={isAuthorized} email={email} logout={logout}/>
+            }
+          </AuthConsumer>
         </div>
       </header>
     );
@@ -20,7 +25,12 @@ class Layout extends PureComponent {
       <header className="footer">
       <SectionTitle className="header__title">footer</SectionTitle>
       <div className="footer__content">
-          <FooterChild />
+      <AuthConsumer >
+            {({ isAuthorized, email, logout }) =>
+              <FooterChild isAuthorized={isAuthorized}/>
+            }
+          </AuthConsumer>
+          
       </div>
       </header>
     );
@@ -28,7 +38,7 @@ class Layout extends PureComponent {
 
   render() {
     const { children } = this.props;
-    console.log(this.props);
+
     return (
         <div>
           <React.Fragment>
