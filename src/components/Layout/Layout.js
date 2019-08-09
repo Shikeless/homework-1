@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import './Layout.css';
 import SectionTitle from '../SectionTitle';
-import { AuthProvider, AuthConsumer } from '../../contexts/Auth'
+import { AuthConsumer } from '../../contexts/Auth'
 
 class Layout extends PureComponent {
   renderHeader(HeaderChild) {
