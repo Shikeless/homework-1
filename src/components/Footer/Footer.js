@@ -4,7 +4,13 @@ import './Footer.css';
 
 class Footer extends PureComponent {
   render() {
-    return this.props.isAuthorized ? <p>LOGED IN</p> : <p>LOGED OUT</p>
+    return (
+      <AuthConsumer >
+        {({ isAuthorized }) =>
+          isAuthorized ? <p>LOGED IN</p> : <p>LOGED OUT</p>
+        }
+      </AuthConsumer>
+    )
   }
 }
 

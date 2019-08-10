@@ -1,19 +1,14 @@
 import React, { PureComponent } from 'react';
 import './Layout.css';
 import SectionTitle from '../SectionTitle';
-import { AuthConsumer } from '../../contexts/Auth'
 
 class Layout extends PureComponent {
   renderHeader(HeaderChild) {
     return (
       <header className="header">
         <SectionTitle className="header__title">Header</SectionTitle>
-        <div className="header__content">
-          <AuthConsumer >
-            {({ isAuthorized, email, logout }) =>
-              <HeaderChild isAuthorized={isAuthorized} email={email} logout={logout}/>
-            }
-          </AuthConsumer>
+        <div className="header__content">    
+          <HeaderChild/>
         </div>
       </header>
     );
@@ -24,11 +19,7 @@ class Layout extends PureComponent {
       <header className="footer">
         <SectionTitle className="header__title">footer</SectionTitle>
         <div className="footer__content">
-          <AuthConsumer >
-            {({ isAuthorized }) =>
-              <FooterChild isAuthorized={isAuthorized}/>
-            }
-          </AuthConsumer>    
+              <FooterChild /> 
         </div>
       </header>
     );
