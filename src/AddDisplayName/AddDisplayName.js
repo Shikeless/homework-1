@@ -11,7 +11,7 @@ export const withDisplayName = (WrappedComponent) => {
       }
     }
    
-    if (Component.displayName !== null) { 
+    if (WrappedComponent.displayName) { 
       Component.displayName = `HOC${getDisplayName(WrappedComponent)}`; 
     } else {
       Component.displayName = 'HOCComponent'
