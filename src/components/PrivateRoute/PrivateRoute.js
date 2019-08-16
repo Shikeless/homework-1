@@ -13,7 +13,7 @@ class PrivateRoute extends Component {
       return (isAuthorized === true ? (
         <RouteComponent {...routeProps} />
       ) : (
-        <Redirect to="/login" />
+        <Redirect to="/" />
       )
     )
   };
@@ -23,7 +23,5 @@ class PrivateRoute extends Component {
     return <Route {...rest} render={this.renderRoute} />;
   }
 }
-
-PrivateRoute = withAuth(PrivateRoute)
 
 export default withAuth(PrivateRoute);

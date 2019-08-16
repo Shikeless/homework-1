@@ -1,7 +1,8 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { withAuth } from '../../context/Auth'
 import cx from 'classnames';
 import classes from './LoginForm.module.css';
+import { Redirect } from 'react-router-dom';
 // Реализуйте компонент формы логина.
 // Используйте `/contexts/Auth` для получения метода authorize
 // и статуса isAuthorized.
@@ -45,40 +46,40 @@ class LoginForm extends React.Component {
       };
 
     render () {
-        console.log(this.props)
         const { values } = this.state;
-        const { authError } = this.props;
-        return (
-            <React.Fragment >
-                <form className={cx(classes.form)}>
-                    {fields.map(({ id, label, type }) => (
-                        <React.Fragment key={id}> 
-                            <label className={cx(classes.labelText)} htmlFor={id}>
-                                <span>{label}</span>
-                            </label>
-                            <input
-                                className={cx(classes.input)}
-                                id={id}
-                                type={type}
-                                name={id}
-                                value={values[id]}
-                                onChange={this.handleChange}
-                            />
-                        </React.Fragment>
-                    ))}
-                </form>
+        const { authError, isAuthorized } = this.props;
+        if (isAuthorized) {
+            return (<Redirect to="/app"/>)
+        } else {
+            return ( 
+                <React.Fragment >
+                    <form className={cx(classes.form)}>
+                        {fields.map(({ id, label, type }) => (
+                            <React.Fragment key={id}> 
+                                <label className={cx(classes.labelText)} htmlFor={id}>
+                                    <span>{label}</span>
+                                </label>
+                                <input
+                                    className={cx(classes.input)}
+                                    id={id}
+                                    type={type}
+                                    name={id}
+                                    value={values[id]}
+                                    onChange={this.handleChange}
+                                />
+                            </React.Fragment>
+                        ))}
+                    </form>
 
-                {authError !== '' && (
-                    <p className={cx(classes.error)}>{authError}</p>
-                )}
-        
-                <button onClick={this.handleSubmit} className={cx(classes.button)}>Войти</button>
-            </React.Fragment>
-      
-        )
+                    {authError !== '' && (
+                        <p className={cx(classes.error)}>{authError}</p>
+                    )}
+            
+                    <button onClick={this.handleSubmit} className={cx(classes.button)}>Войти</button>
+                </React.Fragment>
+            )
+        }
     }
 }
 
-LoginForm = withAuth(LoginForm)
-
-export default LoginForm
+export default withAuth(LoginForm)
