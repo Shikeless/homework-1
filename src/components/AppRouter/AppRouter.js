@@ -5,12 +5,11 @@ import classes from './AppRouter.module.css';
 import Home from '../Home';
 import InboxList from '../InboxList';
 import OutboxList from '../OutboxList';
-import InboxMail from '../InboxList';
-import OutboxMail from '../OutboxList';
+import InboxMail from '../InboxMail';
+import OutboxMail from '../OutboxMail';
 
 class AppRouter extends Component {
     render() {
-      console.log(this.props)
       return (
         <div className={cx(classes.wrapper)}>
             <div className={cx(classes.container)}>
@@ -23,11 +22,11 @@ class AppRouter extends Component {
                 </nav>
                 <div className={cx(classes.content)}>
                   <Switch>
-                    <Route exact path='/app' component={Home}></Route>
-                    <Route exact path='/app/inbox' component={InboxList}></Route>
-                    <Route exact path='/app/outbox' component={OutboxList}></Route>
-                    <Route path='/app/inbox/:id' component={InboxMail}></Route>
-                    <Route path='/app/outbox/:id' component={OutboxMail}></Route>
+                    <Route exact path='/app' component={Home}/>
+                    <Route exact path='/app/inbox' component={InboxList}/>
+                    <Route exact path='/app/outbox' component={OutboxList}/>
+                    <Route path='/app/inbox/:id' component={InboxMail}/>
+                    <Route path='/app/outbox/:id' component={OutboxMail}/>
                     <Redirect to='/app'/>
                   </Switch>
                 </div>
@@ -36,6 +35,5 @@ class AppRouter extends Component {
       )
     }
 }
-
 
 export default withRouter(AppRouter);

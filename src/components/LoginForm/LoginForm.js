@@ -3,11 +3,7 @@ import { withAuth } from '../../context/Auth'
 import cx from 'classnames';
 import classes from './LoginForm.module.css';
 import { Redirect } from 'react-router-dom';
-// Реализуйте компонент формы логина.
-// Используйте `/contexts/Auth` для получения метода authorize
-// и статуса isAuthorized.
 
-// Когда пользователь авторизован - перенаправьте его на роут /app
 const fields = [
     {
       id: 'email',
