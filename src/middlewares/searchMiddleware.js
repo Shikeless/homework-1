@@ -15,9 +15,7 @@ export const searchMiddleware = store => next => action => {
             .catch(error => {
             store.dispatch(searchFailure(error))
         })
-    
-    console.log(store.getState()) 
-    return next(action);
     }
+    return next(action);
 }
 

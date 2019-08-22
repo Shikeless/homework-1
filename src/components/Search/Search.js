@@ -6,12 +6,6 @@ import { connect } from 'react-redux'
 import { searchRequest } from '../../actions/actions'
 import { getShows, getIsLoading, getError } from '../../reducers/searchReducer'
 
-// Реализуйте страницу поиска.
-
-// Используйте метод connect и mapStateToProps, mapDispatchToProps,
-// чтобы получить ссылку на поле search вашего стейта
-// и экшн searchRequest.
-
 class Search extends React.Component {
     state = { searchShows:'' }
 
