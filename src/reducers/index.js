@@ -1,4 +1,8 @@
-import orders from './orders';
 import { combineReducers } from 'redux';
+import searchReducer from './searchReducer';
+// import showReducer from './showReducer';
 
-export default combineReducers({ orders });
+export default combineReducers({
+  searchReducer
+  // showReducer
+});
