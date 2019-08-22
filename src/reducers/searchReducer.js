@@ -29,7 +29,7 @@ export default combineReducers({
     error
 })
 
-export const getShows = state => state.searchReducer.soap
+export const getShows = state => state.searchReducer.shows
 export const getIsLoading = state => state.searchReducer.isLoading
 export const getError = state => state.searchReducer.error
 

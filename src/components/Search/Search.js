@@ -23,6 +23,8 @@ class Search extends React.Component {
         const { searchShows } = this.state
         const { searchRequest } = this.props
         if(searchShows) searchRequest(searchShows)
+
+        this.setState({ searchShows: ''})
     }
 
     render() {
