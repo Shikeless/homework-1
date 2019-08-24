@@ -1,70 +1,58 @@
-import React from 'react'
-import cx from 'classnames';
-import classes from './Search.module.css';
-import ShowPreview from '../ShowPreview'
-import { connect } from 'react-redux'
-import { searchRequest } from '../../actions/actions'
-import { getShows, getIsLoading, getError } from '../../reducers/searchReducer'
+import React from 'react';
+import styles from './Search.module.css';
+import Input from '../Input';
+import { connect } from 'react-redux';
+import { fetchRequest as fetchUserRequest } from '../../modules/User/actions';
+import { fetchRequest as fetchFollowersRequest } from '../../modules/Followers/actions';
+import UserInfo from '../UserInfo';
+import Followers from '../Followers';
 
 class Search extends React.Component {
-    state = { searchShows:'' }
+  state = {
+    user: ''
+  };
 
-    handleChange = e => {
-        this.setState({ searchShows: e.target.value })
+  input = React.createRef();
+
+  handleChange = event => {
+    this.setState({ user: event.target.value });
+  };
+
+  handleKeyPress = event => {
+    const { fetchUserRequest, fetchFollowersRequest } = this.props;
+    const { user } = this.state;
+
+    if (event.key === 'Enter' && user.length > 0) {
+      fetchUserRequest(user);
+      fetchFollowersRequest(user);
     }
-    
-    handleSearch = () => {
-        const { searchShows } = this.state
-        const { searchRequest } = this.props
-        if(searchShows) searchRequest(searchShows)
+  };
 
-        this.setState({ searchShows: ''})
-    }
+  componentDidMount() {
+    this.input.current.focus();
+  }
 
-    render() {
-        const { searchShows } = this.state
-        const { shows, isLoading, error } = this.props
+  render() {
+    const { user } = this.state;
 
-        if (isLoading) return <p>Данные загружаются...</p>
-        if (error) return <p>Произошла ошибка при загрузке</p>
-
-        return (
-            <React.Fragment>
-                <div className={cx(classes.previewList)}>
-                    <input
-                        className={cx(classes.input)}
-                        placeholder='Название Телешоу'
-                        value={searchShows}
-                        onChange={this.handleChange}
-                    />
-                    <div className={cx(classes.buttonWrapper)}>
-                        <button
-                            className={cx(classes.button)}
-                            onClick={this.handleSearch}
-                        >
-                            Найти
-                        </button>
-                    </div>
-                </div>
-                <div className={cx(classes.searchPanel)}>
-                    { shows && shows.map(show =>
-                        <ShowPreview {...show} key={show.id}/>
-                    )}
-                </div>
-            </React.Fragment>
-        )
-    }
+    return (
+      <div className={styles.root}>
+        <Input
+          ref={this.input}
+          value={user}
+          className='t-search-input'
+          placeholder="Ник пользователя"
+          onChange={this.handleChange}
+          onKeyPress={this.handleKeyPress}
+        />
+        <UserInfo />
+        <Followers />
+      </div>
+    );
+  }
 }
 
-const mapStateToProps = state => ({
-    shows: getShows(state), 
-    isLoading: getIsLoading(state),
-    error: getError(state)
-  });
-
-const mapDispatchToProps = { searchRequest };
-
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  undefined,
+  { fetchUserRequest, fetchFollowersRequest }
 )(Search);
