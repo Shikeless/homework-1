@@ -8,5 +8,5 @@ const apiKey = handleActions({
 
 export default combineReducers({ apiKey })
 
-export const getIsAuthorized = state => state.auth.apiKey
+export const getIsAuthorized = state => state.auth.apiKey != null;
 export const getApiKey = state => state.auth.apiKey

@@ -1,6 +1,6 @@
 import {
     fetchRequest,
-    fetchSuсcess,
+    fetchSuccess,
     fetchFailure
 } from './actions'
 
@@ -9,12 +9,12 @@ import { handleActions } from 'redux-actions';
 
 const isLoading = handleActions({
     [fetchRequest]: () => true,
-    [fetchSuсcess]: () => false,
+    [fetchSuccess]: () => false,
     [fetchFailure]: () => false
 }, false)
 
 const data = handleActions({
-    [fetchSuсcess]: (_state, action) => action.payload
+    [fetchSuccess]: (_state, action) => action.payload
 }, null)
 
 export default combineReducers({

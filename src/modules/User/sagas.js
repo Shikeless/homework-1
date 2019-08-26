@@ -1,5 +1,5 @@
 import { takeLatest, select, put, call, fork } from 'redux-saga/effects'
-import { fetchRequest, fetchSuсcess, fetchFailure } from './actions'
+import { fetchRequest, fetchSuccess, fetchFailure } from './actions'
 import { getApiKey } from '../Auth/reducer'
 import { getUserInfo } from './api'
 
@@ -12,7 +12,7 @@ export function* fetchUserFlow(action) {
   try {
     const apiKey = yield select(getApiKey)
     const response = yield call( getUserInfo, apiKey, username )
-    yield put(fetchSuсcess(response))
+    yield put(fetchSuccess(response))
   } catch (error) {
     yield put(fetchFailure(error))
   }

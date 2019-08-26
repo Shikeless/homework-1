@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './followers.module.css';
-import { getData, getIsLoading } from '../../modules/Followers/reducer';
-import { connect } from 'react-redux';
 import cx from 'classnames';
+import { getData, getIsLoading } from '../../modules/Followers';
+import { connect } from 'react-redux';
 
 class Followers extends React.Component {
   render() {
