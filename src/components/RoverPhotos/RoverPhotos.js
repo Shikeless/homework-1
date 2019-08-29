@@ -16,7 +16,7 @@ const styles = {
   }
 };
 
-class RoverPhotos extends PureComponent {
+class RoverPhotos extends React.Component {
   render() {
     const { classes, photos, name } = this.props;
     if (photos !== null) return (

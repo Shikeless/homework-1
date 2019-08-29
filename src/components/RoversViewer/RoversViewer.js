@@ -8,6 +8,7 @@
 // Эти экшены находятся в модуле ROVER PHOTOS
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import styles from './RoversViewer.module.css';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -19,12 +20,28 @@ import { changeSol, fetchPhotosRequest} from '../../modules/RoverPhotos/actions'
 
 
 class RoverViewer extends React.Component {
+    renderWhenUploaded(photos) {
+        if (photos !== null) {
+            return (
+                photos.map(rover => (
+                    <RoverPhotos 
+                        className={styles.container}
+                        key={rover.name}
+                        name={rover.name}
+                        photos={rover.photos}
+                    />
+                ))
+            )
+        }
+    }
+
     render () {
         const { selectedSol, changeSol, fetchPhotosRequest, photos} = this.props
+    
         return (
-            <React.Fragment>
-                <SelectSol selectedSol={selectedSol} changeSol={changeSol} fetchPhotosRequest={fetchPhotosRequest} photos={photos}/>
-                <RoverPhotos photos={this.props.photos}/>
+            <React.Fragment >
+                <SelectSol className={styles.root} selectedSol={selectedSol} changeSol={changeSol} fetchPhotosRequest={fetchPhotosRequest}/>
+                {this.renderWhenUploaded(photos)}
             </React.Fragment>
         )
     }

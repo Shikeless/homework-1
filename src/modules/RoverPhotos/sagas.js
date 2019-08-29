@@ -15,17 +15,18 @@ function* fetchPhotosWatcher() {
 
 export function* fetchPhotosFlow() {
     const rovers = ['opportunity', 'curiosity', 'spirit']
-    const photos = {}
+    const photos = []
   try {
     const apiKey = yield select(getApiKey)
     const selectedSol = yield select(getSelectedSol)
     for (const rover of rovers) {
         const response = yield call( getPhotos, apiKey, rover, selectedSol )
-        photos[rover] = response.photos
+        const roverPhotos = {
+          name: rover,
+          photos: response.photos
+        }
+        photos.push(roverPhotos);
     }
-    console.log(photos)
-    
-
     yield put(fetchPhotosSuccess(photos))
   } catch (error) {
     yield put(fetchPhotosFailure(error))
