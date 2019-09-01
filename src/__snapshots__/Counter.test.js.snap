@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Counter renders correctly 1`] = `
+Array [
+  <div
+    className="count"
+  >
+    0
+  </div>,
+  <button
+    className="increment"
+    onClick={[Function]}
+  >
+    Increment
+  </button>,
+  <button
+    className="decrement"
+    onClick={[Function]}
+  >
+    Decrement
+  </button>,
+]
+`;

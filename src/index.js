@@ -1,6 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/App';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Counter } from "./Counter";
+import { List } from "./List";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <>
+    <h2>Счётчик</h2>
+    <Counter />
+    <hr/>
+    <h2>Список</h2>
+    <List />
+  </>,
+  document.getElementById("root")
+);
