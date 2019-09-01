@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import createStore from './store';
-import { Provider } from 'react-redux';
-import App from './components/App';
-
-const store = createStore();
+import React from "react";
+import ReactDOM from "react-dom";
+import { Counter } from "./Counter";
+import { List } from "./List";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
+  <>
+    <h2>Счётчик</h2>
+    <Counter />
+    <hr/>
+    <h2>Список</h2>
+    <List />
+  </>,
+  document.getElementById("root")
 );

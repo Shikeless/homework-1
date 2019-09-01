@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List renders correctly 1`] = `
+Array [
+  <ul
+    className="list"
+  />,
+  <input
+    className="input"
+    onChange={[Function]}
+    value=""
+  />,
+  <button
+    className="addButton"
+    onClick={[Function]}
+  >
+    Add item
+  </button>,
+]
+`;
